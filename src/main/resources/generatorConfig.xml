@@ -5,7 +5,7 @@
 
 <generatorConfiguration>
 
-    <properties resource="db.properties"/>
+    <properties resource="config/db.properties"/>
     <!--    <context id="MySqlContext" targetRuntime="MyBatis3" defaultModelType="flat">-->
     <!-- 如果不想生成example，在    targetRuntime="MyBatis3" 处修改为  targetRuntime="MyBatis3Simple" -->
     <context id="MySqlContext" targetRuntime="MyBatis3Simple" defaultModelType="flat">

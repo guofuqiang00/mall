@@ -28,8 +28,8 @@
     from user
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, username, password
+  <select id="selectAll" resultType="com.mall.entity.User">
+    select *
     from user
   </select>
 </mapper>

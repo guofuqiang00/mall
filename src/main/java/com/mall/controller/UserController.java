@@ -2,6 +2,7 @@ package com.mall.controller;
 
 import com.mall.dao.user.UserMapper;
 import com.mall.entity.User;
+import com.mall.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,11 +31,11 @@ public class UserController {
         return "ok";
     }
     @RequestMapping("select2")
-    public String select2(){
+    public R select2(){
 
         List<User> users = userMapper.selectAll();
         users.forEach(System.out::println);
 
-        return "ok";
+        return R.ok().put("users",users);
     }
 }

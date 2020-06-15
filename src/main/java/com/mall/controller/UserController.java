@@ -5,6 +5,8 @@ import com.mall.entity.User;
 import com.mall.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -38,4 +40,13 @@ public class UserController {
 
         return R.ok().put("users",users);
     }
+
+    @RequestMapping(value = "/selectUser",method = RequestMethod.GET)
+    @ResponseBody
+    public R selectUser(){
+        List<User> users = userMapper.selectUser();
+        return R.ok().put("data",users);
+    }
+
+
 }

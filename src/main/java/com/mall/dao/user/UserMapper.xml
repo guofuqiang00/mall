@@ -32,4 +32,7 @@
     select *
     from user
   </select>
+    <select id="selectUser" resultType="com.mall.entity.User">
+      select * from user
+    </select>
 </mapper>

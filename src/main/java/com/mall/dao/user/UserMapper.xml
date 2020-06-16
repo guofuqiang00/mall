@@ -33,7 +33,10 @@
     from user
   </select>
     <select id="selectUser" resultType="com.mall.entity.User">
-      select * from user limit #{page.numStart},#{page.pageSize}
+      select * from user
+      <if test="offset != null and limit != null">
+        limit #{offset}, #{limit}
+      </if>
     </select>
   <select id="selectUserCount" resultType="java.lang.Integer">
       select count(1) from user

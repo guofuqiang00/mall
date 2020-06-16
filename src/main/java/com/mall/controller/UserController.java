@@ -3,7 +3,9 @@ package com.mall.controller;
 import com.mall.dao.user.UserMapper;
 import com.mall.entity.User;
 import com.mall.utils.Page;
+import com.mall.utils.QueryPageHelper;
 import com.mall.utils.R;
+import io.swagger.models.parameters.QueryParameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,16 +45,11 @@ public class UserController {
     @RequestMapping(value = "/selectUser",method = RequestMethod.GET)
     @ResponseBody
     public R selectUser(@RequestParam Map<String,Object> map){
-
-        Page<User> page = new Page<>();
-        page.setPageCount(Integer.valueOf(String.valueOf(map.get("page"))));
-        page.setPageSize(Integer.valueOf(String.valueOf(map.get("limit"))));
-        List<User> users = userMapper.selectUser(page);
+        QueryPageHelper queryPageHelper = new QueryPageHelper(map);
+        System.out.println(queryPageHelper);
+        List<User> users = userMapper.selectUser(queryPageHelper);
         int count = userMapper.selectUserCount();
-        Page<User> page1 = new Page<>();
-        page1.setObjects(users);
-        page1.setTotalPage(count);
-        return R.ok().put("data",page1);
+        return R.okPage(users);
     }
 
     @RequestMapping(value = "/insertUser")

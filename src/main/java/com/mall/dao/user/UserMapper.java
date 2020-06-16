@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
+
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -17,7 +19,7 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    List<User>  selectUser(@Param("page")Page<User> page);
+    List<User>  selectUser(Map<String,Object> map);
 
     int selectUserCount();
 }

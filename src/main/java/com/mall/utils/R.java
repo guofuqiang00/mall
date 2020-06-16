@@ -2,6 +2,8 @@ package com.mall.utils;
 
 
 
+import com.github.pagehelper.Page;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,14 +69,14 @@ public class R extends HashMap<String, Object> {
     }
 
     /**
-     *
-     * @param count 总页数
+     *通过pageHelper分页
      * @param list
      * @return
      */
-    public static R okPage(int count, List<?> list) {
+    public static R okPage( List<?> list) {
         R r = new R();
-        r.put("count",count);
+        Page<?> page = (Page) list;
+        r.put("count",Integer.valueOf(page.getTotal()+""));
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("data",list);
         r.putAll(map);

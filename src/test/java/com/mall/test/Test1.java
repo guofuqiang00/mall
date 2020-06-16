@@ -28,8 +28,13 @@ public class Test1 extends BaseCaseTest {
 
     @Test
     public void test(){
+        Map<String,Object> map = new HashMap<String, Object>(){{
+            put("xsds","下阿斯顿撒旦");
+            put("wewe","是的哇的发射点发生");
+        }};
         redisUtil.del("aa");
-
+        boolean userMaper = redisUtil.hmset("userMaper", map);
+        System.out.println(userMaper);
 
     }
 

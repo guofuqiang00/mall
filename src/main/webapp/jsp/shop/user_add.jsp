@@ -63,19 +63,29 @@
                 /*data.createTime = '2020-05-25 00:00:00'*/
                 var that = this;
                 $.ajax({
-                    url:ctx+"/user/insertUser",
+                    url:ctx+"user/insertUser",
                     type:'post',
                     dataType:"json",
+                    contentType:"application/json",
                     data:JSON.stringify(data.field),
                     success:function (data) {
                        console.info("resukt----->",data)
                         if(data.code==0){
-                            console.info(data)
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                            window.parent.layui.table.reload('jobList');
+                            window.top.layer.msg('新增成功！');
 
                         }else{
                             layer.msg(data.msg,{icon:5,offset: '50px'});
                             $(that).removeClass("layui-btn")
                         }
+                    },
+                    error:function (d) {
+                        layer.alert("请求失败", {icon: 6},function () {
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index);
+                        });
                     }
 
                 })

@@ -61,13 +61,24 @@
                 , method: 'get'
                 , id: 'jobList'
                 , title: ''
+                ,page: true
+                ,request:{
+                    pageName: 'page' //页码的参数名称，默认：page
+                    , limitName: 'limit' //每页数据量的参数名，默认：limit
+                },
+                 response: {
+                        statusName: 'code' //数据状态的字段名称，默认：code
+                        , statusCode: 0 //成功的状态码，默认：0
+                        , countName: 'count' //数据总数的字段名称，默认：count
+                        , dataName: 'data' //数据列表的字段名称，默认：data
+                    }
                 , cols: [[
                     {field: '', align: 'center', title: '序号', width: '5%', templet: "#rank"}
                     , {field: 'username', title: '发布时间', width: '12%'}
                     , {field: 'password', title: '密码', width: '12%'}
                     , {field: 'createTime', title: '开始时间', width: '12%'}
                     , {
-                        field: 'status', title: '操作', width: '12%', templet:
+                        field: 'status', title: '操作', width: '18%', templet:
                             function (data) {
                                 var edit = '<button type="button" class="layui-btn layui-btn-normal layui-btn-sm" onclick="edit(' + data.id + ')">编辑</button>';
                                 // var del  ='<button type="button" cpActivityId="+d.cpActivityId+" class="layui-btn layui-btn-danger layui-btn-sm" onclick="del(this)">删除</button>';
@@ -99,6 +110,27 @@
             content: ['user_add.jsp', 'yes']
         });
     });
+
+    function del(id) {
+        layer.confirm('确定删除吗?', {icon: 3, title:'提示'}, function(index){
+            $.ajax({
+                url:ctx+"user/delete",
+                type:'post',
+                data: {id:id},
+                traditional: true,
+                success:function (d) {
+                    if(d.code==0){
+                        window.top.layer.msg('删除成功！');
+                        $(".layui-form").submit();
+                    }else{
+                        layer.msg(d.msg,{icon:5});
+                }
+                    layer.close(index);
+                }
+            });
+        });
+
+    }
 
 
 

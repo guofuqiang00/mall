@@ -24,6 +24,12 @@
 <body>
 
 <div class="productTable">
+
+    <div id="add" style="display: none">
+        <select name="goodsName2" class="goodsName2" data-honour-pk-config="" id="goodsName2" lay-filter="goodsName2">
+            <option value="">请选择</option>
+        </select>
+    </div>
     商品名称：
     <form class="layui-form">
         <div class="layui-inline">
@@ -41,11 +47,26 @@
                 <input   type="text" class="layui-input" style="width: 220px" placeholder="年月日时分秒"   name="endTime" id="endTime"/>
             </div>
         </div>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label"><i>*</i>签到资格活动商品名称：</label>
+            <div class="layui-input-block" style="width: 220px;">
+                <select name="goodsName" data-honour-pk-config="" id="goodsName" lay-filter="goodsName">
+                    <option value="1">01</option>
+                    <option value="2">02</option>
+                    <option value="3">03</option>
+                </select>
+            </div>
+        </div>
+
     </form>
     <button class="layui-btn" data-type="reload">搜索</button>
     <button class="layui-btn layui-btn-normal" data-type="addProduct">新增</button>
     <button class="layui-btn layui-btn-warm" data-type="changeProduct">修改</button>
     <button class="layui-btn layui-btn-danger" data-type="deleteProduct">删除</button>
+
+
 </div>
 
 <table class="layui-hide" id="LAY_table_product" lay-filter="product">
@@ -57,8 +78,38 @@
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
     $(document).ready(function () {
-        layui.use(['table','laydate'], function(){
-            var table = layui.table;
+        layui.use(['layer', 'form', 'table' ,'laydate'], function () {
+            var layer = layui.layer,
+                $ = layui.jquery,
+                form = layui.form,
+                table = layui.table;
+
+            form.on("select(goodsName)", function(data){
+                var value = data.value;
+                var arrays = new Array();
+                arrays[0] = "Android";
+                arrays[1] = "IOS";
+                var length = $("#goodsName2").length;
+                console.info(length)
+
+
+                if(value==2){
+                    document.getElementById("add").style.display="inline";
+                    for (var i = 0; i <arrays.length ; i++) {
+                        $("#goodsName2").append("<option value=\""+i+"\">"+arrays[i]+"</option>");
+                    }
+                    form.render('select');
+
+                }else{
+                    document.getElementById("add").style.display="none";
+                    $("#add").find("option").remove();
+                }
+
+
+
+
+
+            });
 
             //日期
             laydate = layui.laydate;

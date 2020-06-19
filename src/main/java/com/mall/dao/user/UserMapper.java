@@ -21,5 +21,5 @@ public interface UserMapper {
 
     List<User>  selectUser(Map<String,Object> map);
 
-    int selectUserCount();
+    List<User>  selectUserByMap(Map<String,Object> map);
 }

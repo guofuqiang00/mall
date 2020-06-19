@@ -33,10 +33,25 @@ spring:
     static-locations: classpath:/webapp
 
 
+#  security:
+#    user:
+#      name: admin
+#      password: admin
+
+
+
 mybatis:
   config-location: classpath:config/mybatis-config.xml
   mapper-locations: classpath:com/mall/dao/*/*.xml
   type-aliases-package: com.mall.entity
 
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    # root日志以WARN级别输出
+    root: info
+    # 此包下所有class以DEBUG级别输出
+    com.mall: DEBUG
 server:
-  port: 9999
+  port: 5566

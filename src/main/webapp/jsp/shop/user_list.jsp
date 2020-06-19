@@ -88,15 +88,9 @@
                             }
                     }
                 ]]
-                , page: true
-
             });
 
-
-
-
         })
-
 
     })
     $("#addBtn").click(function () {

@@ -1,23 +1,15 @@
 package com.mall.test;
-import com.mall.MallApplication;
-
 import com.mall.base.BaseCaseTest;
 import com.mall.dao.user.UserMapper;
-import com.mall.entity.User;
+import com.mall.utils.JedisUtil;
 import com.mall.utils.RedisUtil;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Profile;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 @ActiveProfiles("dev")
 public class Test1 extends BaseCaseTest {
@@ -25,6 +17,8 @@ public class Test1 extends BaseCaseTest {
     private UserMapper userMapper;
     @Autowired
     RedisUtil redisUtil;
+    @Autowired
+    JedisUtil jedisUtil;
 
     @Test
     public void test(){
@@ -35,6 +29,10 @@ public class Test1 extends BaseCaseTest {
         redisUtil.del("aa");
         boolean userMaper = redisUtil.hmset("userMaper", map);
         System.out.println(userMaper);
+        JedisPool pool = jedisUtil.getPool();
+        Jedis resource = pool.getResource();
+        String set = resource.set("ppp", "fffffffffffffsa飒飒飒飒");
+        System.out.println(set);
 
     }
 

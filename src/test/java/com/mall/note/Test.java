@@ -7,11 +7,23 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Test {
+
+
+
     public static void main(String[] args) {
         //获取当前时间的前一天
         LocalDate now = LocalDate.now().minusDays(1);
         LocalDateTime currentDateTime = LocalDateTime.now().minusDays(1).withHour(0).withMinute(0).withSecond(0);
         System.out.println(now);
+
+        int n=1;
+        // System.out.println(n++);
+       System.out.println((n++));
+
+        for (int i = 0; i <10 ; i++) {
+            System.out.println((i++));
+        }
+
 
     }
 }

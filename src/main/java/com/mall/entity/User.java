@@ -15,6 +15,7 @@ public class User implements Serializable  {
     private String password;
     private Integer age;
     private Status status;
+    private String msg;
 //    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 //    private Date createTime;
 

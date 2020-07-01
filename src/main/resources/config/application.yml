@@ -33,6 +33,14 @@ spring:
     static-locations: classpath:/webapp
 
 
+  rabbitmq:
+    host: 192.168.2.122
+    port: 5672
+    username: guest
+    password: guest
+
+
+
 #  security:
 #    user:
 #      name: admin

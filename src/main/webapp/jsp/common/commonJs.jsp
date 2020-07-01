@@ -6,7 +6,7 @@
 <script type="text/javascript" src="${basePath}/dist/layui/layui.js"></script>
 <link rel="stylesheet" href="${basePath}/dist/layui/css/layui.css"/>
 <script>
-    ctx = 'http://localhost:9999/'
+    ctx = 'http://localhost:5566/'
     //ctx = 'http://192.168.2.122:8686'
 </script>
 

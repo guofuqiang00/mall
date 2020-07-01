@@ -23,7 +23,7 @@ import java.util.Date;
  * */
 
 //@Component("DateCopeTask")
-@Configuration("DateCopeTask")
+//@Configuration("DateCopeTask")
 public class DateCopeTask {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -38,7 +38,6 @@ public class DateCopeTask {
         String format = dateTimeFormatter.format(now);
         System.err.println("执行静态定时任务时间: " + format);
     }
-
 
 
 }

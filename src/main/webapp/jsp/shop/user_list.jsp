@@ -74,7 +74,7 @@
                     }
                 , cols: [[
                     {field: '', align: 'center', title: '序号', width: '5%', templet: "#rank"}
-                    , {field: 'username', title: '发布时间', width: '12%'}
+                    , {field: 'username', title: '用户',edit: 'viewCount', width: '12%'}
                     , {field: 'password', title: '密码', width: '12%'}
                     , {field: 'createTime', title: '开始时间', width: '12%'}
                     , {

@@ -18,9 +18,9 @@ public class SampleScheduler {
     public Trigger sampleJobTrigger(){
         // 每隔两秒执行一次
         SimpleScheduleBuilder scheduleBuilder =
-                SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(20).repeatForever();
+                SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(80).repeatForever();
         return TriggerBuilder.newTrigger().forJob(sampleJobDetail()).withIdentity("sampleTrigger")
                 .withSchedule(scheduleBuilder).build();
-    }
+}
 
 }

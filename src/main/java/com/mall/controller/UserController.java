@@ -1,23 +1,16 @@
 package com.mall.controller;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.mall.config.RedisConfig;
 import com.mall.dao.user.UserMapper;
 import com.mall.entity.User;
+import com.mall.entity.User2;
 import com.mall.utils.QueryPageHelper;
 import com.mall.utils.R;
-import io.swagger.models.parameters.QueryParameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/user")
@@ -56,10 +49,17 @@ public class UserController {
 
     @RequestMapping(value = "/selectUser",method = RequestMethod.GET)
     @ResponseBody
-    public R selectUser(@RequestParam Map<String,Object> map){
-        QueryPageHelper queryPageHelper = new QueryPageHelper(map);
+    public R selectUser(@RequestParam Map<String,Object> params){
+        QueryPageHelper queryPageHelper = new QueryPageHelper(params);
         List<User> users = userMapper.selectUser(queryPageHelper);
         return R.okPage(users);
+
+     /*   int page = Integer.parseInt(params.get("page") + "");
+        int limit = Integer.parseInt(params.get("limit") + "");
+        IPage<User> pages = new Page<>(page, limit);
+        pages.setRecords( userMapper.selectUser(params));
+        return R.ok();*/
+
     }
 
     @RequestMapping(value = "/insertUser")
@@ -79,9 +79,17 @@ public class UserController {
         System.out.println(UserController.index++);
     }
 
-
-
-
-
-
+    //mybatis_plus方式
+    @RequestMapping("/get")
+    public R get(Integer id){
+        User2 user2 = userMapper.selectById(id);
+        return R.ok().put("user",user2);
+    }
+    @RequestMapping("/getByIds")
+    public R getByIds(@RequestBody long [] ids){
+        System.out.println(ids);
+        List<Integer> list = Arrays.asList(1, 1);
+        List<User2> user2s = userMapper.selectBatchIds(list);
+        return R.ok().put("users",user2s);
+    }
 }

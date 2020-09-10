@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.dao.transaction.TransactionMapper">
+  <resultMap id="BaseResultMap" type="com.mall.entity.transaction.Transaction">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="quotation_money" jdbcType="DECIMAL" property="quotationMoney" />
+    <result column="receiving_order" jdbcType="VARCHAR" property="receivingOrder" />
+    <result column="offerer" jdbcType="VARCHAR" property="offerer" />
+    <result column="received" jdbcType="VARCHAR" property="received" />
+    <result column="quotation_time" jdbcType="TIMESTAMP" property="quotationTime" />
+    <result column="if_delete" jdbcType="INTEGER" property="ifDelete" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from transaction
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+    <insert id="insert" parameterType="com.mall.entity.transaction.Transaction">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into transaction (customer_name, quotation_money, receiving_order, 
+      offerer, received, quotation_time,if_delete
+      )
+    values (#{customerName,jdbcType=VARCHAR}, #{quotationMoney,jdbcType=DECIMAL}, #{receivingOrder,jdbcType=VARCHAR}, 
+      #{offerer,jdbcType=VARCHAR}, #{received,jdbcType=VARCHAR}, #{quotationTime,jdbcType=TIMESTAMP},#{ifDelete}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mall.entity.transaction.Transaction">
+    update transaction
+    set customer_name = #{customerName,jdbcType=VARCHAR},
+      quotation_money = #{quotationMoney,jdbcType=DECIMAL},
+      receiving_order = #{receivingOrder,jdbcType=VARCHAR},
+      offerer = #{offerer,jdbcType=VARCHAR},
+      received = #{received,jdbcType=VARCHAR},
+      quotation_time = #{quotationTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, customer_name, quotation_money, receiving_order, offerer, received, quotation_time
+    from transaction
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, customer_name, quotation_money, receiving_order, offerer, received, quotation_time
+    from transaction
+  </select>
+
+    <select id="transactionSearchList" resultType="com.mall.entity.transaction.Transaction">
+        select * from transaction where 1=1
+            and if_delete = 0
+        <if test="keyword!=null and keyword!='null'">
+            and (customer_name like concat('%',#{keyword},'%') or quotation_money like concat('%',#{keyword},'%') or receiving_order like concat('%',#{keyword},'%'))
+        </if>
+    </select>
+
+    <update id="deleteByifdelete">
+        update transaction set if_delete = 1
+        <where>
+            1=1
+            <if test="customerName!=null and customerName!=''">
+                and customer_name =#{customerName}
+            </if>
+        </where>
+    </update>
+
+    <!--
+    <if test="customerName!=null and customerName!=''">
+               and customer_name like concat('%',#{customerName},'%')
+            </if>
+            <if test="quotationMoney!=null and quotationMoney!=''">
+               and quotation_money=#{quotationMoney}
+            </if>
+            <if test="receivingOrder!=null and receivingOrder!=''">
+               and receiving_order=#{receivingOrder}
+            </if>
+            <if test="offerer!=null and offerer!=''">
+               and offerer=#{offerer}
+            </if>
+            <if test="received!=null and received!=''">
+               and received=#{received}
+            </if>
+            <if test="quotationTime!=null and quotationTime!=''">
+               and quotation_time=#{quotationTime}
+            </if>
+    -->
+
+</mapper>

@@ -34,6 +34,16 @@
             <button style="width: 80px" type="button" class="layui-btn lay-submit" id="addBtn">添加</button>
         </div>
     </div>
+    <div class="layui-inline">
+        <div class="layui-input-inline">
+            <button style="width: 80px;margin-left: 20px;" type="button" class="layui-btn layui-btn-danger layui-btn-sm " id="login">登入</button>
+        </div>
+    </div>
+    <div class="layui-inline">
+        <div class="layui-input-inline">
+            <button style="width: 80px;margin-left: 20px;" type="button" class="layui-btn layui-btn-danger layui-btn-sm " id="loginOut">登出</button>
+        </div>
+    </div>
 </form>
 <table class="layui-hide" id="jobList" lay-filter="jobList"></table>
 </body>
@@ -49,6 +59,11 @@
                 $ = layui.jquery,
                 t;
 
+            var search = location.search;
+            console.info("screen--->>>>",GetRequest().token)
+
+
+
             laydate = layui.laydate;
             laydate.render({
                 elem: "#createTime",
@@ -61,6 +76,9 @@
                 , method: 'get'
                 , id: 'jobList'
                 , title: ''
+                , headers: {
+                     token: GetRequest().token
+                          }
                 ,page: true
                 ,request:{
                     pageName: 'page' //页码的参数名称，默认：page
@@ -76,7 +94,7 @@
                     {field: '', align: 'center', title: '序号', width: '5%', templet: "#rank"}
                     , {field: 'username', title: '用户',edit: 'viewCount', width: '12%'}
                     , {field: 'password', title: '密码', width: '12%'}
-                    , {field: 'createTime', title: '开始时间', width: '12%'}
+                    , {field: 'createTime', title: '开始时间', width: '18%'}
                     , {
                         field: 'status', title: '操作', width: '18%', templet:
                             function (data) {
@@ -93,6 +111,37 @@
         })
 
     })
+    $("#login").click(function () {
+        window.location.href = ctx+"login/login";
+    });
+    $("#loginOut").click(function () {
+        $.ajax({
+            url:ctx+"/login/loginOut",
+            type:'get',
+            dataType:"json",
+            contentType:"application/json",
+            success:function (data) {
+                console.info("resukt----->",data)
+                if(data.code==200){
+                    // window.location.href = ctx+"login/login";
+                    window.top.layer.msg(data.msg);
+                    location.reload();
+                }else{
+                    layer.msg(data.msg,{icon:5,offset: '50px'});
+                    // $(that).removeClass("layui-btn")
+                }
+            },
+            error:function (d) {
+                layer.alert("请求失败", {icon: 6},function () {
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                });
+            }
+
+        })
+
+
+    });
     $("#addBtn").click(function () {
         layer.open({
             skin: 'layui-form',
@@ -126,6 +175,18 @@
 
     }
 
+    function GetRequest() {
+        var url = location.search; //获取url中"?"符后的字串
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for(var i = 0; i < strs.length; i ++) {
+                theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
 
 
 

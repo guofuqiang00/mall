@@ -3,7 +3,7 @@ spring:
   datasource:
     platform: mysql
 #    url: jdbc:mysql://192.168.2.122:3307/shopTbs?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-    url: jdbc:mysql://192.168.2.122:3307/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.1.122:3307/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username:  root
     password:  123456
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -34,7 +34,7 @@ spring:
 
 
   rabbitmq:
-    host: 192.168.2.122
+    host: 192.168.1.122
     port: 5672
     username: guest
     password: guest
@@ -62,4 +62,4 @@ logging:
     # 此包下所有class以DEBUG级别输出
     com.mall: DEBUG
 server:
-  port: 5566
+  port: 8585

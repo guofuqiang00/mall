@@ -16,8 +16,8 @@ public class User implements Serializable  {
     private Integer age;
     private Status status;
     private String msg;
-//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-//    private Date createTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
 
 
     public User(Integer id, String username, String password,Integer age) {
@@ -43,6 +43,7 @@ public class User implements Serializable  {
         return age;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -50,20 +51,24 @@ public class User implements Serializable  {
 
         User user = (User) o;
 
-        if (getId() != null ? !getId().equals(user.getId()) : user.getId() != null) return false;
-        if (getUsername() != null ? !getUsername().equals(user.getUsername()) : user.getUsername() != null)
-            return false;
-        if (getPassword() != null ? !getPassword().equals(user.getPassword()) : user.getPassword() != null)
-            return false;
-        return getAge() != null ? getAge().equals(user.getAge()) : user.getAge() == null;
+        if (!getId().equals(user.getId())) return false;
+        if (!getUsername().equals(user.getUsername())) return false;
+        if (!getPassword().equals(user.getPassword())) return false;
+        if (!getAge().equals(user.getAge())) return false;
+        if (getStatus() != user.getStatus()) return false;
+        if (!getMsg().equals(user.getMsg())) return false;
+        return getCreateTime().equals(user.getCreateTime());
     }
 
     @Override
     public int hashCode() {
-        int result = getId() != null ? getId().hashCode() : 0;
-        result = 31 * result + (getUsername() != null ? getUsername().hashCode() : 0);
-        result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
-        result = 31 * result + (getAge() != null ? getAge().hashCode() : 0);
+        int result = getId().hashCode();
+        result = 31 * result + getUsername().hashCode();
+        result = 31 * result + getPassword().hashCode();
+        result = 31 * result + getAge().hashCode();
+        result = 31 * result + getStatus().hashCode();
+        result = 31 * result + getMsg().hashCode();
+        result = 31 * result + getCreateTime().hashCode();
         return result;
     }
 

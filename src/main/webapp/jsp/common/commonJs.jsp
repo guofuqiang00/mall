@@ -6,8 +6,11 @@
 <script type="text/javascript" src="${basePath}/dist/layui/layui.js"></script>
 <link rel="stylesheet" href="${basePath}/dist/layui/css/layui.css"/>
 <script>
-    ctx = 'http://localhost:5566/'
-    //ctx = 'http://192.168.2.122:8686'
+    // ctx = 'http://localhost:5566/'
+    //ctx = 'http://192.168.1.122:5566'
+    // ctx = 'http://tbs.natapp1.cc'
+    // ctx = 'http://2aezgr.natappfree.cc/'
+    ctx = 'http://localhost:8585/'
 </script>
 
 <%-- layui图片压缩插件 layui/modules/upload.js --%>

@@ -20,7 +20,7 @@ import java.util.List;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-    private static final String PACKAGE_NAME="com.shop";
+    private static final String PACKAGE_NAME="com.mall.controller";
     /**
      * 创建API应用
      * apiInfo() 增加API相关信息
@@ -37,7 +37,7 @@ public class SwaggerConfig {
                 .modelRef(new ModelRef("string")).parameterType("header")
                 .required(false).build(); //header中的ticket参数非必填，传空也可以
         pars.add(ticketPar.build());    //根据每个方法名也知道当前方法在设置什么参数
-
+        System.out.println("swagger-----》》》》》》刷新了");
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(PACKAGE_NAME))

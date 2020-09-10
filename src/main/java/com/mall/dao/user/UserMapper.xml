@@ -38,4 +38,11 @@
     <select id="selectUserByMap" resultType="com.mall.entity.User">
       select * from user where username = #{user.username} limit #{page.numStart},#{page.pageSize}
     </select>
+    <select id="selectUsername" parameterType="string" resultType="com.mall.entity.User">
+        select username from user where username =#{username}
+    </select>
+    <select id="loginVerify" resultType="com.mall.entity.User">
+        select * from user where username = #{username} and password = #{password}
+    </select>
+
 </mapper>

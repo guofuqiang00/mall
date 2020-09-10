@@ -1,6 +1,5 @@
 package com.mall.dao.user;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.mall.entity.User;
 import com.mall.entity.User2;
 import com.mall.utils.Page;
@@ -10,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 import java.util.Map;
 
-public interface UserMapper extends BaseMapper<User2> {
+public interface UserMapper  {
     int deleteByPrimaryKey(Integer id);
 
     int insert(User record);
@@ -24,4 +23,8 @@ public interface UserMapper extends BaseMapper<User2> {
     List<User>  selectUser(Map<String,Object> map);
 
     List<User>  selectUserByMap(Map<String,Object> map);
+
+    User selectUsername(@Param("username") String username);
+
+    User loginVerify(Map<String,Object> map);
 }

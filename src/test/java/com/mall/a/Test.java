@@ -1,6 +1,8 @@
 package com.mall.a;
 
 import com.mall.base.BaseCaseTest;
+import com.mall.entity.A;
+import com.mall.entity.T;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.Arrays;
@@ -33,10 +35,14 @@ public class Test {
         String substring = sb.substring(0, sb.length() - 1);
 
 
+    }
 
-
-
-
-
+    @org.junit.Test
+    public void tets(){
+        A a = new A();
+        System.out.println(a);
+        T<String,String> t = (x)->x;
+        String sd = t.run("sd");
+        System.out.println(sd);
     }
 }

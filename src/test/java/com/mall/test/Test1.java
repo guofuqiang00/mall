@@ -1,6 +1,7 @@
 package com.mall.test;
 import com.mall.base.BaseCaseTest;
 import com.mall.dao.user.UserMapper;
+import com.mall.entity.User;
 import com.mall.utils.JedisUtil;
 import com.mall.utils.RedisUtil;
 import org.junit.Test;
@@ -34,6 +35,14 @@ public class Test1 extends BaseCaseTest {
         String set = resource.set("ppp", "fffffffffffffsa飒飒飒飒");
         System.out.println(set);
 
+    }
+
+
+    @Test
+    public void regist(){
+
+        User admin = userMapper.selectUsername("admin");
+        System.out.println(admin);
     }
 
 }

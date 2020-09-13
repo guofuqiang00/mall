@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.dao.user.ActivityMapper">
+  <resultMap id="BaseResultMap" type="com.mall.entity.Activity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="activity_name" jdbcType="VARCHAR" property="activityName" />
+    <result column="activity_area" jdbcType="VARCHAR" property="activityArea" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="distribution_state" jdbcType="INTEGER" property="distributionState" />
+    <result column="nature" jdbcType="VARCHAR" property="nature" />
+    <result column="resource_state" jdbcType="INTEGER" property="resourceState" />
+    <result column="activity_form" jdbcType="VARCHAR" property="activityForm" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from activity
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mall.entity.Activity">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into activity (activity_name, activity_area, start_time, 
+      end_time, distribution_state, nature, 
+      resource_state, activity_form)
+    values (#{activityName,jdbcType=VARCHAR}, #{activityArea,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{distributionState,jdbcType=INTEGER}, #{nature,jdbcType=VARCHAR}, 
+      #{resourceState,jdbcType=INTEGER}, #{activityForm,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mall.entity.Activity">
+    update activity
+    set activity_name = #{activityName,jdbcType=VARCHAR},
+      activity_area = #{activityArea,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      distribution_state = #{distributionState,jdbcType=INTEGER},
+      nature = #{nature,jdbcType=VARCHAR},
+      resource_state = #{resourceState,jdbcType=INTEGER},
+      activity_form = #{activityForm,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, activity_name, activity_area, start_time, end_time, distribution_state, 
+    nature, resource_state, activity_form
+    from activity
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, activity_name, activity_area, start_time, end_time, distribution_state, 
+    nature, resource_state, activity_form
+    from activity
+  </select>
+</mapper>

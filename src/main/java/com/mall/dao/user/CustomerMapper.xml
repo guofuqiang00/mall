@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.dao.user.CustomerMapper">
+  <resultMap id="BaseResultMap" type="com.mall.entity.Customer">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cus_name" jdbcType="VARCHAR" property="cusName" />
+    <result column="cus_shortened" jdbcType="VARCHAR" property="cusShortened" />
+    <result column="cus_property" jdbcType="VARCHAR" property="cusProperty" />
+    <result column="cus_level" jdbcType="INTEGER" property="cusLevel" />
+    <result column="cus_linkman" jdbcType="VARCHAR" property="cusLinkman" />
+    <result column="cus_new_old" jdbcType="VARCHAR" property="cusNewOld" />
+    <result column="cus_business" jdbcType="VARCHAR" property="cusBusiness" />
+    <result column="cus_source" jdbcType="INTEGER" property="cusSource" />
+    <result column="cus_province" jdbcType="INTEGER" property="cusProvince" />
+    <result column="cus_city" jdbcType="INTEGER" property="cusCity" />
+    <result column="cus_region" jdbcType="INTEGER" property="cusRegion" />
+    <result column="cus_address" jdbcType="VARCHAR" property="cusAddress" />
+    <result column="cus_remark" jdbcType="VARCHAR" property="cusRemark" />
+    <result column="cus_business_license" jdbcType="VARCHAR" property="cusBusinessLicense" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from customer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mall.entity.Customer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into customer (cus_name, cus_shortened, cus_property, 
+      cus_level, cus_linkman, cus_new_old, 
+      cus_business, cus_source, cus_province, 
+      cus_city, cus_region, cus_address, 
+      cus_remark, cus_business_license)
+    values (#{cusName,jdbcType=VARCHAR}, #{cusShortened,jdbcType=VARCHAR}, #{cusProperty,jdbcType=VARCHAR}, 
+      #{cusLevel,jdbcType=INTEGER}, #{cusLinkman,jdbcType=VARCHAR}, #{cusNewOld,jdbcType=VARCHAR}, 
+      #{cusBusiness,jdbcType=VARCHAR}, #{cusSource,jdbcType=INTEGER}, #{cusProvince,jdbcType=INTEGER}, 
+      #{cusCity,jdbcType=INTEGER}, #{cusRegion,jdbcType=INTEGER}, #{cusAddress,jdbcType=VARCHAR}, 
+      #{cusRemark,jdbcType=VARCHAR}, #{cusBusinessLicense,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mall.entity.Customer">
+    update customer
+    set cus_name = #{cusName,jdbcType=VARCHAR},
+      cus_shortened = #{cusShortened,jdbcType=VARCHAR},
+      cus_property = #{cusProperty,jdbcType=VARCHAR},
+      cus_level = #{cusLevel,jdbcType=INTEGER},
+      cus_linkman = #{cusLinkman,jdbcType=VARCHAR},
+      cus_new_old = #{cusNewOld,jdbcType=VARCHAR},
+      cus_business = #{cusBusiness,jdbcType=VARCHAR},
+      cus_source = #{cusSource,jdbcType=INTEGER},
+      cus_province = #{cusProvince,jdbcType=INTEGER},
+      cus_city = #{cusCity,jdbcType=INTEGER},
+      cus_region = #{cusRegion,jdbcType=INTEGER},
+      cus_address = #{cusAddress,jdbcType=VARCHAR},
+      cus_remark = #{cusRemark,jdbcType=VARCHAR},
+      cus_business_license = #{cusBusinessLicense,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, cus_name, cus_shortened, cus_property, cus_level, cus_linkman, cus_new_old, 
+    cus_business, cus_source, cus_province, cus_city, cus_region, cus_address, cus_remark, 
+    cus_business_license
+    from customer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, cus_name, cus_shortened, cus_property, cus_level, cus_linkman, cus_new_old, 
+    cus_business, cus_source, cus_province, cus_city, cus_region, cus_address, cus_remark, 
+    cus_business_license
+    from customer
+  </select>
+
+    <insert id="insertCustomer" parameterType="com.mall.entity.Customer">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into customer (cus_name, cus_shortened, cus_property,
+        cus_level, cus_linkman, cus_new_old,
+        cus_business, cus_source, cus_province,
+        cus_city, cus_region, cus_address,
+        cus_remark, cus_business_license)
+        values (#{cusName,jdbcType=VARCHAR}, #{cusShortened,jdbcType=VARCHAR}, #{cusProperty,jdbcType=VARCHAR},
+        #{cusLevel,jdbcType=INTEGER}, #{cusLinkman,jdbcType=VARCHAR}, #{cusNewOld,jdbcType=VARCHAR},
+        #{cusBusiness,jdbcType=VARCHAR}, #{cusSource,jdbcType=INTEGER}, #{cusProvince,jdbcType=INTEGER},
+        #{cusCity,jdbcType=INTEGER}, #{cusRegion,jdbcType=INTEGER}, #{cusAddress,jdbcType=VARCHAR},
+        #{cusRemark,jdbcType=VARCHAR}, #{cusBusinessLicense,jdbcType=VARCHAR})
+    </insert>
+</mapper>

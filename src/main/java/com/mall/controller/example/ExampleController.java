@@ -45,19 +45,13 @@ public class ExampleController {
      */
     @PostMapping("/getUserAndUserCopy")
     public User getUserAndUserCopy(@RequestBody User user){
+        //第二个实体的值user.getUserCopy()
         String address = user.getUserCopy().getAddress();
         String phone = user.getUserCopy().getPhone();
         System.out.println("address--->"+address);
         System.out.println("phone--->"+phone);
         return user;
     }
-
-
-
-
-
-
-
 
 
 

@@ -8,7 +8,9 @@ spring:
       max-request-size=10MB:
       #单个文件的最大值
       max-file-size=10MB:
-
+  devtools:
+    restart:
+      enabled: true
 
 
 pagehelper:

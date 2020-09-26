@@ -47,6 +47,15 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--热部署-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
+
 
         <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
         <dependency>
@@ -89,18 +98,28 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>-->
+
         <plugins>
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <fork>true</fork> &lt;!&ndash; 如果没有该配置，devtools不会生效 &ndash;&gt;-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                <version>2.1.0.RELEASE</version>-->
+<!--            </plugin>-->
+            <!-- 跳过单元测试 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.1.0.RELEASE</version>
-            </plugin>
-            <!-- 跳过单元测试 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <skipTests>true</skipTests>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
                 </configuration>
             </plugin>
         </plugins>

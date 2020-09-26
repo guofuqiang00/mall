@@ -32,6 +32,9 @@ spring:
   resources:
     static-locations: classpath:/webapp
 
+logging:
+  level:
+    com.mall.dao: debug
 
 mybatis:
   config-location: classpath:config/mybatis-config.xml

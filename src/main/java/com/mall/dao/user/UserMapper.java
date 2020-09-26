@@ -1,17 +1,14 @@
 package com.mall.dao.user;
 
+import com.mall.base.BaseMapper;
 import com.mall.entity.User;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-public interface UserMapper {
-    int deleteByPrimaryKey(Integer id);
+import java.util.Map;
 
-    int insert(User record);
+public interface UserMapper extends BaseMapper<User> {
 
-    User selectByPrimaryKey(Integer id);
+  int  deleteUser(Map<String,Object> map);
 
-    List<User> selectAll();
-
-    int updateByPrimaryKey(User record);
+  List<User>  selectUserByMap(Map<String,Object> map);
 }
